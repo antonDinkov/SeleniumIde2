@@ -22,14 +22,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
-
-    - name: Install Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-
-    - name: Install ChromeDriver
-      run: sudo apt-get install -y chromium-chromedriver
         
     - name: Restore dependencies
       run: dotnet restore
@@ -38,6 +30,4 @@ jobs:
       run: dotnet build --no-restore
       
     - name: Test
-      env: 
-        CHROMEWEBDRIVER: /usr/bin/chromedriver
-      run: dotnet test --verbosity normal
+      run: dotnet test -no-build --verbosity normal
